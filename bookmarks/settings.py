@@ -25,7 +25,7 @@ SECRET_KEY = '!7egogv3154$3^rhfndi9traz#+=os@goqno4a1w*%lmn!q8o6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
+    'social_django',
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -120,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
@@ -130,3 +133,15 @@ EMAIL_HOST_USER = 'alexandrmaksimchuck@gmail.com'
 EMAIL_HOST_PASSWORD = 'nagatouzumaki98'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookAppOAuth2',
+]
+SOCIAL_AUTH_FACEBOOK_KEY = '284943905433195' # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '3d66a446963336caedaebd12715aa5eb' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['alexandrmaksimchuck@gmail.com']
